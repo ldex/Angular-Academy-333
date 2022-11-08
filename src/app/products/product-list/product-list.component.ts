@@ -17,7 +17,10 @@ export class ProductListComponent implements OnInit {
 
   title: string = 'Products';
   selectedProduct: Product;
+
   products$: Observable<Product[]>;
+  mostExpensiveProduct$: Observable<Product>;
+
   errorMessage;
 
   // Pagination
@@ -62,10 +65,14 @@ export class ProductListComponent implements OnInit {
     this.products$ = this
                       .productService
                       .products$;
+
+    this.mostExpensiveProduct$ = this
+                                    .productService
+                                    .mostExpensiveProduct$;
   }
 
   refresh() {
     this.productService.initProducts();
     this.router.navigateByUrl('/products'); // Self route navigation
-  }  
+  }
 }
