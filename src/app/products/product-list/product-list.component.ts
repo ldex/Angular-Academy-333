@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   selectedProduct: Product;
 
   products$: Observable<Product[]>;
+  productsNumber$: Observable<number>;
   mostExpensiveProduct$: Observable<Product>;
 
   errorMessage;
@@ -65,6 +66,12 @@ export class ProductListComponent implements OnInit {
     this.products$ = this
                       .productService
                       .products$;
+
+    this.productsNumber$ = this
+                              .products$
+                              .pipe(
+                                map(products => products.length)
+                              );
 
     this.mostExpensiveProduct$ = this
                                     .productService
