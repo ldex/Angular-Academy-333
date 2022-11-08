@@ -12,6 +12,7 @@ export class ProductService {
   private baseUrl = 'https://storerestservice.azurewebsites.net/api/products/';
   products$: Observable<Product[]>;
   mostExpensiveProduct$: Observable<Product>;
+  productsToLoad = 10;
 
   constructor(private http: HttpClient) {
     this.initProducts();
@@ -31,8 +32,8 @@ export class ProductService {
       )
   }
 
-  initProducts() {
-    let url:string = this.baseUrl + `?$orderby=ModifiedDate%20desc`;
+  initProducts(skip = 0, take = this.productsToLoad) {
+    let url = this.baseUrl + `?$skip=${skip}&$top=${take}&$orderby=ModifiedDate%20desc`;
 
     this.products$ = this
                       .http

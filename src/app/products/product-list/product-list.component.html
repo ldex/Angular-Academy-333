@@ -52,4 +52,8 @@
             [disabled]="(productsNumber$ | async) <= end">
         Next Page >
     </button>
+    <button *ngIf="(productsNumber$ | async) <= end"
+            (click)="loadMore()">
+        Load {{productsToLoad}} more...
+    </button>
 </div>
