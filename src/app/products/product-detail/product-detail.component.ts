@@ -26,6 +26,20 @@ export class ProductDetailComponent implements OnInit {
     this.router.navigateByUrl('/products');
   }
 
+  delete() {
+    if(window.confirm('Are you sure ?')) {
+      this
+        .productService
+        .deleteProduct(this.product.id)
+        .subscribe(
+          () => {
+            this.productService.initProducts();
+            this.router.navigateByUrl('/products');
+          }
+        )
+    }
+  }
+
   ngOnInit(): void {
     const id = + this.activatedRoute.snapshot.params['id'];
     this
